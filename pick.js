@@ -1,6 +1,14 @@
 "use strict";
-// function process() : string {
-// }
+function process(param, obj) {
+    const newObj = Object.assign({}, obj);
+    let reducedValue = "";
+    if (typeof param == 'string') {
+        reducedValue = param.split('.').reduce((acc, curr) => {
+            return acc ? acc[curr] : null;
+        }, newObj);
+    }
+    return reducedValue;
+}
 function checkType(param, obj) {
     let newObj = {};
     const initValue = Object.assign({}, obj);

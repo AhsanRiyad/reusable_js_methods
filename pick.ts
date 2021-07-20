@@ -2,8 +2,17 @@ interface map<B> {
     [ key: string ] : B
 }
 
-// function process() : string {
-// }
+function process<T, W>(param: T, obj: W) {
+    const newObj = {...obj};
+    let reducedValue: any = "";
+    if(typeof param == 'string')
+    {
+        reducedValue =  param.split('.').reduce((acc: { [key: string] : any }, curr)=>{
+            return acc ? acc[curr] : null;
+        }, newObj)
+    }
+    return reducedValue;
+}
 
 
 
