@@ -38,16 +38,24 @@ let obj: map<string | object>  = {
 
 let arr: any[] = [ 'age' ,  { name: 'riyad.name'} , 'else' ]
 
+const pick = function<T, W> (arr: T[], obj: W){
+    let newObj: { [key: string]: any } = {};
+    arr.forEach(n => {
+        if (typeof n == 'object') {
+            let value = Object.values(n)[0];
+            const newValue = checkType(value, obj);
+            if (newValue) newObj[Object.keys(n)[0]] = newValue;
 
-arr.forEach( n =>{
-    let newObj : { [key: string] : any } = {};
-    if (typeof n == 'object') {
-        let value  = Object.values(n)[0];
-        const newValue = checkType(value, obj);
-        if (newValue) newObj[Object.keys(n)[0]] = newValue;
-        
-    } else if (typeof n == 'string') {
-        const newValue = checkType(n, obj);
-        if(newValue) newObj[n] = newValue;
-    }
-})
+        } else if (typeof n == 'string') {
+            const newValue = checkType(n, obj);
+            if (newValue) newObj[n] = newValue;
+        }
+    })
+
+    return newObj;
+}
+
+
+
+
+console.log(pick(arr, obj))

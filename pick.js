@@ -26,17 +26,21 @@ let obj = {
     }
 };
 let arr = ['age', { name: 'riyad.name' }, 'else'];
-arr.forEach(n => {
+const pick = function (arr, obj) {
     let newObj = {};
-    if (typeof n == 'object') {
-        let value = Object.values(n)[0];
-        const newValue = checkType(value, obj);
-        if (newValue)
-            newObj[Object.keys(n)[0]] = newValue;
-    }
-    else if (typeof n == 'string') {
-        const newValue = checkType(n, obj);
-        if (newValue)
-            newObj[n] = newValue;
-    }
-});
+    arr.forEach(n => {
+        if (typeof n == 'object') {
+            let value = Object.values(n)[0];
+            const newValue = checkType(value, obj);
+            if (newValue)
+                newObj[Object.keys(n)[0]] = newValue;
+        }
+        else if (typeof n == 'string') {
+            const newValue = checkType(n, obj);
+            if (newValue)
+                newObj[n] = newValue;
+        }
+    });
+    return newObj;
+};
+console.log(pick(arr, obj));
