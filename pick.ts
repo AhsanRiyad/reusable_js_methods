@@ -22,18 +22,14 @@ function checkType<T , W extends { [key: string] : any }>(param: T , obj: W ) : 
     if(typeof param == 'object'){
         let key: string = Object.keys(param)[0];
         let value: string = Object.values(param)[0];
-        const reducedValue: any = value.split('.').reduce((acc, cur) => {
-            return acc ? acc[cur] : null
-        }, initValue)
+        const reducedValue: any = process(value, obj);
         if (reducedValue){
             newObj[key] = reducedValue;
         }
 
         return newObj;
     }else if( typeof param == 'string' ) {
-        const reducedValue : any  =  param.split('.').reduce(( acc, cur )=>{
-            return acc ? acc[cur] : null
-        } , initValue)
+        const reducedValue : any  =  process(param, obj);
         if (reducedValue) {
             newObj[param] = reducedValue;
         }
@@ -57,6 +53,9 @@ let arr: any[] = [ 'age' ,  { name: 'riyad.name'} , 'else' ]
 
 
 arr.forEach( n =>{
+    
+
+
     console.log(checkType(n, obj))
 })
 
