@@ -10,26 +10,13 @@ function process(param, obj) {
     return reducedValue;
 }
 function checkType(param, obj) {
-    let newObj = {};
-    const initValue = Object.assign({}, obj);
-    if (typeof param == 'object') {
-        let key = Object.keys(param)[0];
-        let value = Object.values(param)[0];
-        const reducedValue = process(value, obj);
-        if (reducedValue) {
-            newObj[key] = reducedValue;
-        }
-        return newObj;
-    }
-    else if (typeof param == 'string') {
-        const reducedValue = process(param, obj);
-        if (reducedValue) {
-            newObj[param] = reducedValue;
-        }
-        return newObj;
+    let reducedValue = '';
+    if (typeof param == 'string') {
+        reducedValue = process(param, obj);
+        return reducedValue;
     }
     else {
-        return newObj;
+        return reducedValue;
     }
 }
 let obj = {
@@ -40,7 +27,16 @@ let obj = {
 };
 let arr = ['age', { name: 'riyad.name' }, 'else'];
 arr.forEach(n => {
-    console.log(checkType(n, obj));
+    let newObj = {};
+    if (typeof n == 'object') {
+        let value = Object.values(n)[0];
+        const newValue = checkType(value, obj);
+        if (newValue)
+            newObj[Object.keys(n)[0]] = newValue;
+    }
+    else if (typeof n == 'string') {
+        const newValue = checkType(n, obj);
+        if (newValue)
+            newObj[n] = newValue;
+    }
 });
-// console.log( checkType( arr[0] , obj )   )
-// console.log( Object.values(obj)[0] )
