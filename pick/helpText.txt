@@ -1,0 +1,10 @@
+    npm install -g typeScript
+
+    to compile
+    tsc filename.ts
+
+or 
+    if you use a config file then only
+    tsc
+    to compile
+

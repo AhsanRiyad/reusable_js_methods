@@ -1,18 +1,29 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+exports.__esModule = true;
 exports.pick = function () {
     function process(param, obj) {
-        const newObj = Object.assign({}, obj);
-        let reducedValue = "";
+        var newObj = __assign({}, obj);
+        var reducedValue = "";
         if (typeof param == 'string') {
-            reducedValue = param.split('.').reduce((acc, curr) => {
+            reducedValue = param.split('.').reduce(function (acc, curr) {
                 return acc ? acc[curr] : null;
             }, newObj);
         }
         return reducedValue;
     }
     function checkType(param, obj) {
-        let reducedValue = '';
+        var reducedValue = '';
         if (typeof param == 'string') {
             reducedValue = process(param, obj);
             return reducedValue;
@@ -21,24 +32,24 @@ exports.pick = function () {
             return reducedValue;
         }
     }
-    let obj = {
+    var obj = {
         "age": "20",
         "riyad": {
             "name": "riyad"
         }
     };
-    let arr = ['age', { name: 'riyad.name' }, 'else'];
-    const pick1 = function (arr, obj) {
-        let newObj = {};
-        arr.forEach(n => {
+    var arr = ['age', { name: 'riyad.name' }, 'else'];
+    var pick1 = function (arr, obj) {
+        var newObj = {};
+        arr.forEach(function (n) {
             if (typeof n == 'object') {
-                let value = Object.values(n)[0];
-                const newValue = checkType(value, obj);
+                var value = Object.values(n)[0];
+                var newValue = checkType(value, obj);
                 if (newValue)
                     newObj[Object.keys(n)[0]] = newValue;
             }
             else if (typeof n == 'string') {
-                const newValue = checkType(n, obj);
+                var newValue = checkType(n, obj);
                 if (newValue)
                     newObj[n] = newValue;
             }

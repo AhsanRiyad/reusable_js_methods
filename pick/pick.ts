@@ -15,8 +15,6 @@ export const pick = function () {
         return reducedValue;
     }
 
-
-
     function checkType<T, W extends { [key: string]: any }>(param: T, obj: W): string {
         let reducedValue = '';
         if (typeof param == 'string') {
@@ -26,18 +24,6 @@ export const pick = function () {
             return reducedValue;
         }
     }
-
-
-
-
-    let obj: map<string | object> = {
-        "age": "20",
-        "riyad": {
-            "name": "riyad"
-        }
-    }
-
-    let arr: any[] = ['age', { name: 'riyad.name' }, 'else']
 
     const pick1 = function <T, W>(arr: T[], obj: W) {
         let newObj: { [key: string]: any } = {};
@@ -52,10 +38,16 @@ export const pick = function () {
                 if (newValue) newObj[n] = newValue;
             }
         })
-
         return newObj;
     }
-
     return pick1;
-
 }();
+
+
+// let arr1: any[] = ['age', { name: 'riyad.name' }, 'else'];
+
+// pick(arr1, {
+//     age: 14
+// } );
+
+
